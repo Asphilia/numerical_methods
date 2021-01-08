@@ -36,7 +36,7 @@ def spline_function(x, point_arr, args_arr):
         print(f'Out of range. x must be between {xs[0]} and {xs[-1]}, but is {x}')
         return False
     for i in range(len(xs)-1):
-        if x<xs[i+1]:
+        if x<=xs[i+1]:
             y = a[i] + b[i]*(x-xs[i]) + c[i]* (x-xs[i])**2 + d[i]* (x-xs[i])**3
             return y
     print(f'Should not end up here... Something went wrong...')
@@ -89,16 +89,26 @@ def calc_spline_args(point_arr):
     c = c[:-1]
     return [a,b,c,d], n
 
-def spline_and_plot(points):
+def spline_and_plot(points, decimals=1):
     '''
     plots and prints the spline and its parameters
     '''
     args_, n = calc_spline_args(points)
-    for i in np.arange(points[0][0], points[-1][0], 0.1):
+    inter = 1*10**(-decimals)
+    spline_x = np.arange(points[0][0], points[-1][0]+1e-5, inter)
+    #print(spline_x)
+    spline_y = []
+    for i in spline_x:
+        i = round(i, decimals+1)
         yn = spline_function(i, points, args_)
-        plt.plot(i, yn, 'g.')
+        spline_y.append(yn)
+    plt.plot(spline_x,spline_y, 'b', label='Spline')
     for px, py in points:
-        plt.plot(px,py,'ro')
+        plt.plot(px,py,'ro', label=f'Point {px}|{py}')
+    plt.legend()
+    plt.title('Cubic Spline Interpolation')
+    plt.xlabel('x')
+    plt.ylabel('y')
     
     print('Variables in the spline function:')
     for i in range(n-1):
