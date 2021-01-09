@@ -1,0 +1,12 @@
+## Specify files to ignore in commit
+
+# Folders
+.vscode
+.ipynb_checkpoints/
+**/__pycache__/
+**/build/
+**/tmp/
+pictures_tmp/
+
+# Files
+*ntitled.ipynb
