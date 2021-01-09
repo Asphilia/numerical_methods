@@ -7,13 +7,7 @@ import numpy as np
 import scipy as sc
 import matplotlib.pyplot as plt
 
-def trapez_rule(p1, p2):
-    a = p1[0]
-    b= p2[0]
-    fa = p1[1]
-    fb = p2[1]
-    trap = (b-a)/2 *(fa+fb)
-    return trap, [p1,p2]
+##### plot area #####
 
 def plot_under(points):
     x = []
@@ -23,6 +17,16 @@ def plot_under(points):
         y.append(py)
     plt.fill_between(x, y, 0, color=(1,0,1,0.5))
     plt.plot(x, y, 'ro', label='Stützstellen')
+
+##### äquidistante stützstellen #####
+
+def trapez_rule(p1, p2):
+    a = p1[0]
+    b= p2[0]
+    fa = p1[1]
+    fb = p2[1]
+    trap = (b-a)*(fa+fb)/2
+    return trap, [p1,p2]
     
 def simpson_rule(a, b, f):
     m = (a+b)/2
@@ -58,7 +62,8 @@ def additive_nc(a,b,k,n,f,alpha):
         summe += res
         for point in points: 
             points_.append(point) 
-    summe = summe*h
+    if n >= 4:
+        summe = summe*h
     return summe, points_
 
 def plot_and_integral(a,b,f,n=2,k=1,alpha=[0.5,0.5], step=0.1):
