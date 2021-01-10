@@ -52,7 +52,7 @@ def newton_cotes(a,b,n,f,alpha):
     #s = s*h
     return s, points
     
-def additive_nc(a,b,k,n,f,alpha):
+def additive_nc(a,b,f,k=1,n=2,alpha=[0.5,0.5]):
     h = (b-a)/k
     xs = [a+i*h for i in range(k+1)]
     summe = 0
