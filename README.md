@@ -2,3 +2,18 @@
 Author: Janike Katter
 
 There will be mistakes. Do not take the results of the methods at face value, always add a few grains of salt.
+
+## Includes:
+* Cubic Spline interpolation with natural border conditions (splines.py)
+* Polynomial interpolation (interpolation.py)
+* Newton interpolation, newton polynom (interpolation.py)
+* Trapez integration (integration.py)
+* Integration with Simpson-rule (integration.py)
+* Newton-Cotes integration (integration.py)
+* Composite integration with newton-cotes (integration.py)
+
+## Planed:
+* Cubic Spline interpolation with not-a-knot condition
+* romberg-algorithm for integration
+* addaptive-algorithm for integration
+* householder transformation
