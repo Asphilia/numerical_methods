@@ -79,3 +79,37 @@ def adaptiv_loop(a,b,f,tol,tree, parent_index):
     sfin = (16*s1-s0)/15
     tree.create_node(f'[{a},{b}] -> \033[32m★ | {sfin}\033[0m', curr_index, parent=parent_index)
     return sfin, [a,b]
+
+def gauss_quadratur_parameter(a,b,n):
+    '''
+    Method to calculate the gauss-quadratur parameters x and alpha. 'a' is the left integral border, 
+    'b' is the right integral border. 'n' is the number of weights. Maximum here is 4.
+    '''
+    h = (b-a)/2
+    hs = (b+a)/2
+    if n > 4:
+        return [],[]
+    x =[
+        [0],
+        [-np.sqrt(1/3), np.sqrt(1/3)],
+        [-np.sqrt(3/5), 0, np.sqrt(3/5)],
+        [-np.sqrt(3/7 + 2*np.sqrt(6/5)/7), -np.sqrt(3/7 + 2*np.sqrt(6/5)/7), np.sqrt(3/7 + 2*np.sqrt(6/5)/7), np.sqrt(3/7 + 2*np.sqrt(6/5)/7)],
+        [-np.sqrt(5+2*np.sqrt(10/7))/3, -np.sqrt(5+2*np.sqrt(10/7))/3, 0, np.sqrt(5+2*np.sqrt(10/7))/3, np.sqrt(5+2*np.sqrt(10/7))/3]
+    ]
+    a = [
+        [2],
+        [1,1],
+        [5/9, 8/9, 5/9],
+        [(18-np.sqrt(30))/36, (18+np.sqrt(30))/36, (18+np.sqrt(30))/36, (18-np.sqrt(30))/36],
+        [(322-13*np.sqrt(70))/900, (322+13*np.sqrt(70))/900, 128/225, (322+13*np.sqrt(70))/900, (322-13*np.sqrt(70))/900]
+    ]
+    
+    x_ret = []
+    a_ret = []
+    for xk in x[n]:
+        xks = h*xk+hs
+        x_ret.append(xks)
+    for ak in a[n]:
+        aks = h*ak
+        a_ret.append(aks)
+    return x_ret, a_ret
