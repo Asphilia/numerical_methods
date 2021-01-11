@@ -63,6 +63,28 @@ def newton_polynom(x, args, xs):
         ret += nret
     return ret
 
+def lagrange_polynom(x, points):
+    xs = []
+    ys = []
+    for xks, yks in points:
+        xs.append(xks)
+        ys.append(yks)
+    if not ((x >= xs[0]) and (x <= xs[-1])):
+        print('Fehler!!!')
+    fx = 0
+    for i in range(len(xs)):
+        zahler = 1
+        nenner = 1
+        for j in range(i):
+            zahler = zahler * (x-xs[j])
+            nenner = nenner * (xs[i]-xs[j])
+        for j in range(i+1,len(xs)):
+            zahler = zahler * (x-xs[j])
+            nenner = nenner * (xs[i]-xs[j])
+        fx += ys[i]*(zahler/nenner)
+    return fx
+    
+
 def plot_newton_and_polynom(points):
     pol_args = calc_polynom(points)
     newton_args = calc_newton_polynom(points)
@@ -82,4 +104,23 @@ def plot_newton_and_polynom(points):
     plt.xlabel('x')
     plt.ylabel('y')
     return pol_args, newton_args
+
+def plot_polynom_and_lagrange(points):
+    pol_args = calc_polynom(points)
+    xs = [x for x,y in points]
+    ys = [y for x,y in points]
+    xrange = np.arange(xs[0], xs[-1]+0.01,0.1)
+    yrange_pol = []
+    yrange_lagrange = []
+    for x in xrange:
+        yrange_pol.append(polynom(x,pol_args))
+        yrange_lagrange.append(lagrange_polynom(x, points))
+    plt.plot(xrange, yrange_pol, 'g--', label='Polynom Interpolation')
+    plt.plot(xrange, yrange_lagrange, 'b.', label='Lagrange')
+    plt.plot(xs, ys, 'ro', label='Punkte')
+    plt.legend(bbox_to_anchor=(1.25, 0, 0.5, 1), loc='center left')
+    plt.title('Lagrange and Polynom Interpolation')
+    plt.xlabel('x')
+    plt.ylabel('y')
+    return pol_args
         
