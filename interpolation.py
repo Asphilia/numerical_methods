@@ -1,7 +1,7 @@
 '''
 This file contains some methods for numerical interpolation without splines.
 Author: Janike Katter
-Version: 09.01.2021
+Version: 11.01.2021
 '''
 import numpy as np
 import scipy.linalg as linalg
@@ -55,6 +55,10 @@ def calc_newton_polynom(points):
     return bs
 
 def newton_polynom(x, args, xs):
+    '''
+    Polynom fuction for the newton polynom. args are the arguments from calc_newton_polynom,
+    xs are the x coordinates of the knots
+    '''
     ret = args[0]
     currx = 1
     for i in range(len(xs)-1):
@@ -64,6 +68,9 @@ def newton_polynom(x, args, xs):
     return ret
 
 def lagrange_polynom(x, points):
+    '''
+    Calculates the value of x for the lagrange polynom with knots points.
+    '''
     xs = []
     ys = []
     for xks, yks in points:
@@ -83,6 +90,71 @@ def lagrange_polynom(x, points):
             nenner = nenner * (xs[i]-xs[j])
         fx += ys[i]*(zahler/nenner)
     return fx
+
+def print_lagrange(points):
+    '''
+    Prints the Lagrange Polynom Formula onto the console
+    '''
+    xs = []
+    ys = []
+    zahlerrow = '       '
+    formel = 'l(x) = '
+    nennerrow = '       '
+    for xks, yks in points:
+        xs.append(xks)
+        ys.append(yks)
+    for i in range(len(xs)):
+        zahler = ''
+        nenner = ''
+        for j in range(i):
+            zahler += f'(x-{xs[j]})'
+            nenner += f'({xs[i]}-{xs[j]})'
+        for j in range(i+1,len(xs)):
+            zahler += f'(x-{xs[j]})'
+            nenner += f'({xs[i]}-{xs[j]})'
+        zl = len(zahler)
+        nl = len(nenner)
+        big_len = max(nl, zl)
+        zrow = zahler.center(big_len)
+        nrow = nenner.center(big_len)
+        line = '-'.center(big_len, '-')
+        preadd = f'{ys[i]} • '
+        prelen = len(preadd)
+        prez = ' '.center(prelen)
+        formel += f'{preadd}{line}'
+        zahlerrow += f'{prez}{zrow}'
+        nennerrow += f'{prez}{nrow}'
+        if not i == len(xs)-1:
+            zahlerrow += '   '
+            formel += ' + '
+            nennerrow += '   '
+    print(f'{zahlerrow}\n{formel}\n{nennerrow}')
+    return None
+
+def print_polynom(points):
+    '''
+    Prints the polynom Formula onto the console
+    '''
+    pol_args = calc_polynom(points)
+    formel = f'p(x) = {pol_args[0]}'
+    for i in range(1,len(pol_args)):
+        formel += f' + {pol_args[i]} • x^{i}'
+    print(formel)
+    return None
+
+def print_newton(points):
+    '''
+    Prints the newton formula onto the console
+    '''
+    newt_args = calc_newton_polynom(points)
+    xs = [x for x,y in points]
+    formel = f'n(x) = {newt_args[0]}'
+    curry = ''
+    for i in range(len(xs)-1):
+        curry += f'(x-{xs[i]})'
+        formel += f' + {newt_args[i+1]} • {curry}'
+    print(formel)
+    return None
     
 
 def plot_newton_and_polynom(points):
