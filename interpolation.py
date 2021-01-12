@@ -103,7 +103,16 @@ def print_lagrange(points):
     for xks, yks in points:
         xs.append(xks)
         ys.append(yks)
+    general = 'l(x) = '
+    for i in range(len(ys)):
+        general += f'{ys[i]}  •  L{i}(x)'
+        if not i == len(ys)-1:
+            general += ' + '
+    print(general)
     for i in range(len(xs)):
+        row = f'L{i}(x) = '
+        zprep = ' '.center(len(row))
+        nprep = ' '.center(len(row))
         zahler = ''
         nenner = ''
         for j in range(i):
@@ -118,17 +127,7 @@ def print_lagrange(points):
         zrow = zahler.center(big_len)
         nrow = nenner.center(big_len)
         line = '-'.center(big_len, '-')
-        preadd = f'{ys[i]} • '
-        prelen = len(preadd)
-        prez = ' '.center(prelen)
-        formel += f'{preadd}{line}'
-        zahlerrow += f'{prez}{zrow}'
-        nennerrow += f'{prez}{nrow}'
-        if not i == len(xs)-1:
-            zahlerrow += '   '
-            formel += ' + '
-            nennerrow += '   '
-    print(f'{zahlerrow}\n{formel}\n{nennerrow}')
+        print(f'\n{zprep}{zrow}\n{row}{line}\n{nprep}{nrow}')
     return None
 
 def print_polynom(points):
