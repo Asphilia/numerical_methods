@@ -71,7 +71,7 @@ def plot_and_integral(a,b,f,n=2,k=1,alpha=[0.5,0.5], step=0.1):
     yrange = []
     for x in xrange:
         yrange.append(f(x))
-    integral_result, points = additive_nc(a,b,k,n,f,alpha)
+    integral_result, points = additive_nc(a,b,f,k,n,alpha)
     plt.plot(a,0,'white', label=f'The numerical integration result is {integral_result}')
     plot_under(points)
     plt.plot(xrange,yrange,'black', label='Funktion f(x)')
