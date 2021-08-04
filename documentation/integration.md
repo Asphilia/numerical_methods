@@ -1,5 +1,5 @@
 # Integration
-Author: Janike Katter
+Author: Janike Katter  
 Version: 11.01.2021
 
 ## Method summary
@@ -144,3 +144,6 @@ Integral_(a)^(b) f(x)dx ≈ α0 * f(x0) + α1 * f(x1)
   
 ##### change history
 * 11.01.2021: creation
+* 04.08.2021: link back to README
+
+[Back](../README.md)
