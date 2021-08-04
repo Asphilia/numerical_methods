@@ -1,5 +1,5 @@
 # splines.py
-Author: Janike Katter
+Author: Janike Katter  
 Version: 11.01.2021
 
 ## Method summary
@@ -28,3 +28,6 @@ spline_and_plot(point_arr) calculates the spline parameters with calc_spline_arg
 
 ##### change history
 * 11.01.2021: creation
+* 04.08.2021: link back to README
+
+[Back](../README.md)
