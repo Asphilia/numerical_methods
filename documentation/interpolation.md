@@ -1,5 +1,5 @@
 # Interpolation.py
-Author: Janike Katter
+Author: Janike Katter  
 Version: 11.01.2021
 
 ## Method summary
@@ -72,3 +72,6 @@ plot_polynom_and_lagrange(points) plots the interpolation polynom and the lagran
 
 ###### change history
 * 11.01.2021: creation
+* 04.08.2021: link back to README
+
+[Back](../README.md)
