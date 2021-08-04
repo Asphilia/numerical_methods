@@ -14,6 +14,11 @@ There will be mistakes. Do not take the results of the methods at face value, al
 * romberg-algorithm for integration (integration_additions.py)
 * addaptive-algorithm for integration (integration_additions.py)
 
+## Documentation
+[interpolation](documentation/interpolation.md)  
+[integration](documentation/integration.md)  
+[splines](documentation/splines.md)  
+
 ## Planed:
 * Cubic Spline interpolation with not-a-knot condition
 * householder transformation
